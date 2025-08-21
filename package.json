@@ -7,7 +7,9 @@
     "dev:https": "next dev --experimental-https",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "vercel-install": "npm install --prefer-offline --no-audit --legacy-peer-deps",
+    "vercel-build": "npm run vercel-install && npm run build"
   },
   "dependencies": {
     "@telegram-apps/sdk-react": "^3.2.4",
