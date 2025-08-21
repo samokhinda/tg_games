@@ -41,7 +41,18 @@ export const Link: FC<LinkProps> = ({
 
       if (isExternal) {
         e.preventDefault();
-        openLink(targetUrl.toString());
+        try {
+          // Проверяем доступность openLink API
+          if (openLink.isAvailable && openLink.isAvailable()) {
+            openLink(targetUrl.toString());
+          } else {
+            // Fallback для обычного браузера
+            window.open(targetUrl.toString(), '_blank');
+          }
+        } catch (error) {
+          console.warn('OpenLink API not available, using fallback:', error);
+          window.open(targetUrl.toString(), '_blank');
+        }
       }
     },
     [href, propsOnClick],

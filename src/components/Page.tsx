@@ -14,17 +14,36 @@ export function Page({ children, back = true }: PropsWithChildren<{
   const router = useRouter();
 
   useEffect(() => {
-    if (back) {
-      backButton.show();
-    } else {
-      backButton.hide();
+    // Проверяем, что мы в браузере и backButton доступен
+    if (typeof window === 'undefined') return;
+    
+    try {
+      // Проверяем доступность backButton методов
+      if (backButton.isAvailable()) {
+        if (back) {
+          backButton.show();
+        } else {
+          backButton.hide();
+        }
+      }
+    } catch (error) {
+      console.warn('BackButton API not available:', error);
     }
   }, [back]);
 
   useEffect(() => {
-    return backButton.onClick(() => {
-      router.back();
-    });
+    // Проверяем, что мы в браузере и backButton доступен
+    if (typeof window === 'undefined') return;
+    
+    try {
+      if (backButton.isAvailable()) {
+        return backButton.onClick(() => {
+          router.back();
+        });
+      }
+    } catch (error) {
+      console.warn('BackButton onClick not available:', error);
+    }
   }, [router]);
 
   return <>{children}</>;
