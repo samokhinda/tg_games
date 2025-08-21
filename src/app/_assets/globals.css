@@ -1,8 +1,30 @@
+/* Полноэкранный режим */
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Убираем скроллбары */
+  position: fixed; /* Фиксируем для полного экрана */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
 body {
   background: var(--tg-theme-secondary-bg-color, white);
-  padding: 0;
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  /* Поддержка safe area для iPhone X+ */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+/* Основной контейнер приложения */
+#__next {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Общие анимации */
