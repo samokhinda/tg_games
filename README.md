@@ -1,141 +1,205 @@
-# Telegram Mini Apps Next.js Template
+# 🎮 Терапевтические игры для Telegram Mini Apps
 
-This template demonstrates how developers can implement a web application on the
-Telegram Mini Apps platform using the following technologies and libraries:
+Коллекция специально разработанных игр для детей с особыми потребностями в экосистеме Telegram Mini Apps.
 
-- [Next.js](https://nextjs.org/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [TON Connect](https://docs.ton.org/develop/dapps/ton-connect/overview)
-- [@telegram-apps SDK](https://docs.telegram-mini-apps.com/packages/telegram-apps-sdk/2-x)
-- [Telegram UI](https://github.com/Telegram-Mini-Apps/TelegramUI)
+## 🌟 Основные игры
 
-> The template was created using [pnpm](https://pnpm.io/). Therefore, it is
-> required to use it for this project as well. Using other package managers, you
-> will receive a corresponding error.
+### 🏃‍♂️ Прыгающий Герой (Jumping Hero)
+**Терапевтическая игра для детей с аутизмом**
 
-## Install Dependencies
+Сказочный мальчик прыгает по дорожным люкам на движущейся дороге, управляемый наклонами телефона через гироскоп.
 
-If you have just cloned this template, you should install the project
-dependencies using the command:
+#### ✨ Особенности:
+- 📱 **Управление гироскопом** - наклоны телефона влево/вправо
+- 🎵 **Музыкальная терапия** - приятные звуки при сборе звездочек
+- 🌈 **Успокаивающий дизайн** - мягкие цвета и плавные анимации
+- ⭐ **Система поощрений** - позитивные сообщения каждые 5 звездочек
+- 🧠 **Развитие навыков** - координация, сенсорная интеграция
+- 💝 **Адаптированный UX** - специально для детей с аутизмом
 
-```Bash
-pnpm install
-```
+#### 🎯 Как играть:
+1. Включите гироскоп в настройках Telegram
+2. Наклоняйте телефон влево-вправо для движения героя
+3. Автоматически прыгайте на дорожные люки 🕳️
+4. Собирайте звездочки ⭐ и слушайте музыку
+5. Получайте поощрительные сообщения за успехи!
 
-## Scripts
+### 🧩 Пятнашки (15-Puzzle)
+**Классическая головоломка**
 
-This project contains the following scripts:
+Традиционная игра-головоломка с современным дизайном в стиле Telegram.
 
-- `dev`. Runs the application in development mode.
-- `dev:https`. Runs the application in development mode using self-signed SSL
-  certificate.
-- `build`. Builds the application for production.
-- `start`. Starts the Next.js server in production mode.
-- `lint`. Runs [eslint](https://eslint.org/) to ensure the code quality meets
-  the required
-  standards.
+#### ✨ Особенности:
+- 🎯 Расположите числа от 1 до 15 по порядку
+- 🎨 Красивый UI в стиле Telegram Mini Apps
+- 📱 Адаптивный дизайн для всех устройств
+- 🏆 Счетчик ходов и определение победы
 
-To run a script, use the `pnpm run` command:
+## 🚀 Технологии
 
-```Bash
-pnpm run {script}
-# Example: pnpm run build
-```
+- **Frontend**: React 18 + Next.js 15 + TypeScript
+- **UI Kit**: @telegram-apps/telegram-ui
+- **Styling**: CSS Modules + CSS-in-JS
+- **APIs**: 
+  - Telegram Mini App SDK
+  - DeviceOrientationEvent (гироскоп)
+  - Web Audio API (музыка)
+  - Haptic Feedback API
 
-## Create Bot and Mini App
+## 📱 Запуск в разработке
 
-Before you start, make sure you have already created a Telegram Bot. Here is
-a [comprehensive guide](https://docs.telegram-mini-apps.com/platform/creating-new-app)
-on how to do it.
+### Предварительные требования
+- Node.js 18+
+- npm или yarn
+- Современный браузер с поддержкой гироскопа
 
-## Run
-
-Although Mini Apps are designed to be opened
-within [Telegram applications](https://docs.telegram-mini-apps.com/platform/about#supported-applications),
-you can still develop and test them outside of Telegram during the development
-process.
-
-To run the application in the development mode, use the `dev` script:
-
+### Установка
 ```bash
-pnpm run dev
+# Клонируйте репозиторий
+git clone https://github.com/samokhinda/tg_games.git
+cd tg_games
+
+# Установите зависимости
+npm install
+
+# Запустите в режиме разработки
+npm run dev
 ```
 
-After this, you will see a similar message in your terminal:
+Приложение будет доступно по адресу: `http://localhost:3000`
 
+### HTTPS для тестирования в Telegram
 ```bash
-▲ Next.js 14.2.3
-- Local:        http://localhost:3000
-
-✓ Starting...
-✓ Ready in 2.9s
+# Для тестирования в Telegram нужен HTTPS
+npm run dev:https
 ```
 
-To view the application, you need to open the `Local`
-link (`http://localhost:3000` in this example) in your browser.
+## 🔧 Настройка Telegram Bot
 
-It is important to note that some libraries in this template, such as
-`@telegram-apps/sdk`, are not intended for use outside of Telegram.
+### 1. Создание бота
+1. Найдите [@BotFather](https://t.me/BotFather) в Telegram
+2. Отправьте `/newbot`
+3. Следуйте инструкциям для создания бота
+4. Сохраните токен бота
 
-Nevertheless, they appear to function properly. This is because the
-`src/hooks/useTelegramMock.ts` file, which is imported in the application's
-`Root` component, employs the `mockTelegramEnv` function to simulate the
-Telegram environment. This trick convinces the application that it is
-running in a Telegram-based environment. Therefore, be cautious not to use this
-function in production mode unless you fully understand its implications.
+### 2. Настройка Mini App
+1. Отправьте `/newapp` в [@BotFather](https://t.me/BotFather)
+2. Выберите вашего бота
+3. Введите название: "Терапевтические игры"
+4. Введите описание: "Специальные игры для детей с особыми потребностями"
+5. Загрузите иконку (512x512 px)
+6. Введите URL: `https://yourdomain.com` (или ngrok для тестирования)
 
-### Run Inside Telegram
+### 3. Тестирование
+- Разработка: `https://localhost:3000` (с SSL сертификатом)
+- Продакшен: Разверните на Vercel/Netlify/GitHub Pages
 
-Although it is possible to run the application outside of Telegram, it is
-recommended to develop it within Telegram for the most accurate representation
-of its real-world functionality.
+## 🏗️ Архитектура проекта
 
-To run the application inside Telegram, [@BotFather](https://t.me/botfather)
-requires an HTTPS link.
+```
+src/
+├── app/                    # Next.js App Router
+│   ├── page.tsx           # Главная страница
+│   ├── layout.tsx         # Корневой layout
+│   └── _assets/           # Глобальные стили
+├── components/            # React компоненты
+│   ├── JumpingGame/       # Терапевтическая игра
+│   ├── FifteenPuzzle/     # Игра Пятнашки
+│   └── ...
+├── hooks/                 # Кастомные React хуки
+│   ├── useGyroscope.ts    # Работа с гироскопом
+│   ├── useJumpingGame.ts  # Логика игры
+│   └── useFifteenPuzzle.ts # Логика пятнашек
+└── types/                 # TypeScript типы
+    └── telegram.d.ts      # Типы Telegram API
+```
 
-This template already provides a solution.
+## 🎨 Дизайн-система
 
-To retrieve a link with the HTTPS protocol, consider using the `dev:https`
-script:
+### Цветовая палитра для терапии
+- **Основные**: Голубой → Зеленый (успокаивающие)
+- **Акценты**: Золотой (награды), Оранжевый (поощрения)
+- **Фон**: Градиенты для комфорта глаз
 
+### Принципы UX для детей с аутизмом
+- ✅ Высокий контраст для лучшей видимости
+- ✅ Плавные анимации без резких движений
+- ✅ Крупные интерактивные элементы
+- ✅ Позитивная обратная связь
+- ✅ Предсказуемое поведение интерфейса
+
+## 🧠 Терапевтические аспекты
+
+### Развиваемые навыки
+1. **Моторика**: Координация движений через гироскоп
+2. **Сенсорная интеграция**: Связь движения, зрения и слуха
+3. **Концентрация**: Фокус на простых задачах
+4. **Самооценка**: Позитивная обратная связь
+5. **Пространственное мышление**: Понимание направлений
+
+### Адаптации для аутизма
+- 🔄 Повторяющиеся паттерны для комфорта
+- 🎵 Музыкальная терапия при успехах
+- 🌈 Визуальные награды (звездочки, анимации)
+- 📢 Поощрительные сообщения
+- ⏱️ Отсутствие временных ограничений
+
+## 📦 Сборка и деплой
+
+### Сборка для продакшена
 ```bash
-$ pnpm run dev:https
-
-▲ Next.js 14.2.3
-- Local:        https://localhost:3000
-
-✓ Starting...
-✓ Ready in 2.4s
+npm run build
+npm start
 ```
 
-Visiting the `Local` link (`https://localhost:3000` in this example) in your
-browser, you will see the following warning:
+### Деплой на Vercel (рекомендуется)
+```bash
+# Установите Vercel CLI
+npm i -g vercel
 
-![SSL Warning](assets/ssl-warning.png)
+# Деплой
+vercel --prod
+```
 
-This browser warning is normal and can be safely ignored as long as the site is
-secure. Click the `Proceed to localhost (unsafe)` button to continue and view
-the application.
+### Деплой на GitHub Pages
+```bash
+npm run build
+npm run export
+# Загрузите содержимое папки out/ на GitHub Pages
+```
 
-Once the application is displayed correctly, submit the
-link `https://127.0.0.1:3000` (`https://localhost:3000` is considered as invalid
-by BotFather) as the Mini App link to [@BotFather](https://t.me/botfather).
-Then, navigate to [https://web.telegram.org/k/](https://web.telegram.org/k/),
-find your bot, and launch the Telegram Mini App. This approach provides the full
-development experience.
+## 🤝 Участие в разработке
 
-## Deploy
+Мы приветствуем вклад в развитие терапевтических игр!
 
-The easiest way to deploy your Next.js app is to use
-the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
-from the creators of Next.js.
+### Как помочь:
+1. 🐛 Сообщайте о багах через Issues
+2. 💡 Предлагайте новые идеи для игр
+3. 🔧 Создавайте Pull Requests с улучшениями
+4. 📚 Улучшайте документацию
+5. 🧪 Тестируйте с детьми и делитесь отзывами
 
-Check out
-the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for
-more details.
+### Правила разработки:
+- Следуйте принципам accessibility
+- Тестируйте на реальных устройствах
+- Учитывайте особенности детей с аутизмом
+- Документируйте терапевтические аспекты
 
-## Useful Links
+## 📄 Лицензия
 
-- [Platform documentation](https://docs.telegram-mini-apps.com/)
-- [@telegram-apps/sdk-react documentation](https://docs.telegram-mini-apps.com/packages/telegram-apps-sdk-react)
-- [Telegram developers community chat](https://t.me/devs)
+MIT License - см. файл [LICENSE](LICENSE)
+
+## 🙏 Благодарности
+
+- Команде Telegram за отличную платформу Mini Apps
+- Сообществу разработчиков терапевтических приложений
+- Родителям и терапевтам за обратную связь
+
+## 📞 Контакты
+
+- GitHub: [@samokhinda](https://github.com/samokhinda)
+- Репозиторий: [tg_games](https://github.com/samokhinda/tg_games)
+
+---
+
+**🌟 Создано с любовью для детей с особыми потребностями**
