@@ -18,7 +18,14 @@ import { setLocale } from '@/core/i18n/locale';
 import './styles.css';
 
 function RootInner({ children }: PropsWithChildren) {
-  const lp = useLaunchParams();
+  // Безопасно получаем launch параметры только на клиенте
+  let lp: any = null;
+  try {
+    lp = useLaunchParams();
+  } catch (error) {
+    // Игнорируем ошибки во время SSR
+    console.warn('Launch parameters not available during SSR');
+  }
 
   const isDark = useSignal(miniApp.isDark);
   const initDataUser = useSignal(initData.user);
@@ -33,7 +40,7 @@ function RootInner({ children }: PropsWithChildren) {
       <AppRoot
         appearance={isDark ? 'dark' : 'light'}
         platform={
-          ['macos', 'ios'].includes(lp.tgWebAppPlatform) ? 'ios' : 'base'
+          lp && ['macos', 'ios'].includes(lp.tgWebAppPlatform) ? 'ios' : 'base'
         }
       >
         {children}

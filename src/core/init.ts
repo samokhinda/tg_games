@@ -22,9 +22,21 @@ export async function init(options: {
   eruda: boolean;
   mockForMacOS: boolean;
 }): Promise<void> {
+  // Проверяем, что мы в браузере
+  if (typeof window === 'undefined') {
+    console.warn('Telegram SDK initialization skipped during SSR');
+    return;
+  }
+
   // Set @telegram-apps/sdk-react debug mode and initialize it.
   setDebug(options.debug);
-  initSDK();
+  
+  try {
+    initSDK();
+  } catch (error) {
+    console.warn('Failed to initialize Telegram SDK:', error);
+    return;
+  }
 
   // Add Eruda if needed.
   options.eruda &&
@@ -46,7 +58,12 @@ export async function init(options: {
             tp = themeParamsState();
           } else {
             firstThemeSent = true;
-            tp ||= retrieveLaunchParams().tgWebAppThemeParams;
+            try {
+              tp ||= retrieveLaunchParams().tgWebAppThemeParams;
+            } catch (error) {
+              console.warn('Failed to retrieve launch parameters:', error);
+              tp = {};
+            }
           }
           return emitEvent('theme_changed', { theme_params: tp });
         }
