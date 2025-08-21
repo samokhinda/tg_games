@@ -18,13 +18,11 @@ export function Page({ children, back = true }: PropsWithChildren<{
     if (typeof window === 'undefined') return;
     
     try {
-      // Проверяем доступность backButton методов
-      if (backButton.isAvailable()) {
-        if (back) {
-          backButton.show();
-        } else {
-          backButton.hide();
-        }
+      // Проверяем доступность backButton методов через try-catch
+      if (back) {
+        backButton.show();
+      } else {
+        backButton.hide();
       }
     } catch (error) {
       console.warn('BackButton API not available:', error);
@@ -36,11 +34,9 @@ export function Page({ children, back = true }: PropsWithChildren<{
     if (typeof window === 'undefined') return;
     
     try {
-      if (backButton.isAvailable()) {
-        return backButton.onClick(() => {
-          router.back();
-        });
-      }
+      return backButton.onClick(() => {
+        router.back();
+      });
     } catch (error) {
       console.warn('BackButton onClick not available:', error);
     }

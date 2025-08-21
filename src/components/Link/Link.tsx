@@ -42,15 +42,11 @@ export const Link: FC<LinkProps> = ({
       if (isExternal) {
         e.preventDefault();
         try {
-          // Проверяем доступность openLink API
-          if (openLink.isAvailable && openLink.isAvailable()) {
-            openLink(targetUrl.toString());
-          } else {
-            // Fallback для обычного браузера
-            window.open(targetUrl.toString(), '_blank');
-          }
+          // Пытаемся использовать Telegram openLink
+          openLink(targetUrl.toString());
         } catch (error) {
           console.warn('OpenLink API not available, using fallback:', error);
+          // Fallback для обычного браузера
           window.open(targetUrl.toString(), '_blank');
         }
       }
